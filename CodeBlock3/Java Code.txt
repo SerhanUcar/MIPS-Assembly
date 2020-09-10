@@ -1,0 +1,8 @@
+public int Topla(int n){
+	
+	int toplam=0;
+	for(int i=n; i>0; i--){
+		toplam+=i;
+	}
+	return toplam;
+}

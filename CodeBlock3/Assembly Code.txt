@@ -1,0 +1,24 @@
+main:
+	addi $s0, $s0, 5			#int n=5
+	addi $sp, $sp, -4			#Stack Pointer’da 1 tane eleman için yer açıldı
+	sw $s0, 0($sp)				# n Stack Pointer’a eklendi
+	jal Topla
+	j    End
+
+Topla:
+	add $t0, $t0, $zero			#int top=0
+	add $t1, $t1, $s0			#int i=n
+
+Loop:
+	beq $t1, $zero, EndLoop			#if(i==0) Goto End
+	add $t0, $t0, $t1			#top=top+i
+	addi $t1, $t1, -1			#i - -
+	j         Loop
+
+EndLoop: 
+	add $v0, $v0, $t0			#return değeri = top yapıldı
+	lw $s0, 0($sp)				#n Stack Pointer’dan çıkartıldı
+	addi $sp, $sp, 4			#Stack Pointer eski haline döndürüldü
+	jr     $ra				# Return top yapıldı
+
+End:
