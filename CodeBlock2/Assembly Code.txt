@@ -1,0 +1,27 @@
+main:
+	addi $s0, $s0, 10000000		#Dizi[0]
+	addi $s1, $s1, 10		#Dizi.length
+	addi $s2, $s2, 10005000		#Sıfırdan büyük sayıların tutulacağı dizi
+	addi $s3, $s3, 10006000		#Sıfırdan küçük sayıların tutulacağı dizi
+	addi $t0, $t0, 0			#i=0
+
+Loop:
+	beq $t0, $s1, End		#if(i==10) End
+	sll    $t1, $t0, 2		#i=i*4
+	add $t2, $s0, $t1		#t2=Dizi[i]
+	slt   $t3, $t2, 0		#if(t2<0) t3=1
+	beq $t3, $zero, Buyuk		#if(t2==0) Goto Buyuk
+	sw $t2,$s3			#s3 içeriğinin Dizi[i] olması
+	sw $zero, $t1($s0)		#Veri taşındığı için Dizi[i] = 0 yapılması
+	addi $s3, $s3, 4		#Bir sonraki eleman için s3=s3+4
+	addi $t0, $t0, 1		#i++
+	j        Loop
+
+Buyuk:
+	sw $t2, $s2			#s2=Dizi[i]
+	sw $zero, $t1($s0)		# Veri taşındığı için Dizi[i] = 0 yapılması
+	addi $s2,$s2,4			#Bir sonraki eleman için s2=s2+4
+	addi $t0, $t0, 1		#i++
+	j        Loop
+
+End:

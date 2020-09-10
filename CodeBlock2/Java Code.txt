@@ -1,0 +1,14 @@
+public static void main(String[] args){
+
+	for(int i=0; i<Dizi.length; i++){
+		if(Dizi[i]<=0){
+			KucukDizi[SmallCount]=Dizi[i];
+			SmallCount++;
+		}
+		else{
+			BuyukDizi[BigCount]=Dizi[i];
+		   	BigCount++;
+		    }
+	}	
+	
+}
