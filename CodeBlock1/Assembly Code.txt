@@ -1,0 +1,31 @@
+Siralimi:add $t0,$t0,$zero			#i=0
+Loop:	sll $t1,$t0,2				#i*4	
+	addi $t2,$t1,4				#(i*4)+4
+	add $t3,$s0,$t1				#A[i]
+	add $t4,$s0,$t2				#A[i+1]
+
+	beq $t0,$s1,ReturnTrue		#if(i==Dizi.length) ReturnTrue
+	slt $t5,$t3,$t4				#if(A[i]<A[i+1]) t5=1
+	beq $t5,$zero,ReturnFalse		#if(t5==0) ReturnFalse
+	addi $t0,$t0,1				#i++
+	j	Loop
+
+
+ReturnTrue:	add $v0,$v0,$zero		#Sıralıysa return 0
+	lw $s0,0($sp)				#Stackten verinin çıkarılması	
+	lw $s1,4($sp)				
+	addi $sp,$sp,8				#Stackin eski haline getirilmesi
+	jr $ra					#return
+
+ReturnFalse:	addi $v0,$v0,1			#Sıralı değilse return 1
+	lw $s0,0($sp)				#Stackten verinin çıkarılması
+	lw $s1,4($sp)
+	addi $sp,$sp,8				#Stackin eski haline getirilmesi
+	jr $ra					#return
+
+main:	addi $s0,$s0,10000000			#Dizinin başlangıç adresi
+	addi $s1,$s1,10				#Dizi.length=10
+	addi $sp,$sp,-8				#Stackte 2 elemanlık yer açıldı
+	sw $s1,4($sp)
+	sw $s0,0($sp)
+	jal Siralimi
