@@ -4,7 +4,7 @@ Loop:	sll $t1,$t0,2				#i*4
 	add $t3,$s0,$t1				#A[i]
 	add $t4,$s0,$t2				#A[i+1]
 
-	beq $t0,$s1,ReturnTrue		#if(i==Dizi.length) ReturnTrue
+	beq $t0,$s1,ReturnTrue			#if(i==Dizi.length) ReturnTrue
 	slt $t5,$t3,$t4				#if(A[i]<A[i+1]) t5=1
 	beq $t5,$zero,ReturnFalse		#if(t5==0) ReturnFalse
 	addi $t0,$t0,1				#i++
